@@ -16,6 +16,8 @@
 		7AD8AEFD290FDDAC00F220CA /* EpisodeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD8AEFC290FDDAC00F220CA /* EpisodeListViewController.swift */; };
 		7AD8AEFF290FDDC600F220CA /* LocationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD8AEFE290FDDC600F220CA /* LocationListViewController.swift */; };
 		7AD8AF01290FDDDE00F220CA /* CharacterListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD8AF00290FDDDE00F220CA /* CharacterListViewController.swift */; };
+		7AD8AF0F290FE3B800F220CA /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD8AF0E290FE3B800F220CA /* Character.swift */; };
+		7AD8AF11290FE6EF00F220CA /* CharacterLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD8AF10290FE6EF00F220CA /* CharacterLocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		7AD8AEFC290FDDAC00F220CA /* EpisodeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeListViewController.swift; sourceTree = "<group>"; };
 		7AD8AEFE290FDDC600F220CA /* LocationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListViewController.swift; sourceTree = "<group>"; };
 		7AD8AF00290FDDDE00F220CA /* CharacterListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListViewController.swift; sourceTree = "<group>"; };
+		7AD8AF0E290FE3B800F220CA /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		7AD8AF10290FE6EF00F220CA /* CharacterLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterLocation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,7 +134,10 @@
 		7AD8AEF9290FDD6E00F220CA /* Character */ = {
 			isa = PBXGroup;
 			children = (
-				7AD8AF00290FDDDE00F220CA /* CharacterListViewController.swift */,
+				7AD8AF0C290FE2D300F220CA /* Views */,
+				7AD8AF0B290FE2C500F220CA /* ViewModels */,
+				7AD8AF0A290FE2C000F220CA /* Models */,
+				7AD8AF09290FE2BA00F220CA /* Repo */,
 			);
 			path = Character;
 			sourceTree = "<group>";
@@ -138,7 +145,10 @@
 		7AD8AEFA290FDD7C00F220CA /* Location */ = {
 			isa = PBXGroup;
 			children = (
-				7AD8AEFE290FDDC600F220CA /* LocationListViewController.swift */,
+				7AD8AF0D290FE2DF00F220CA /* Models */,
+				7AD8AF08290FE2AD00F220CA /* Views */,
+				7AD8AF07290FE2A600F220CA /* ViewModels */,
+				7AD8AF06290FE2A100F220CA /* Repo */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -146,9 +156,101 @@
 		7AD8AEFB290FDD8600F220CA /* Episode */ = {
 			isa = PBXGroup;
 			children = (
-				7AD8AEFC290FDDAC00F220CA /* EpisodeListViewController.swift */,
+				7AD8AF05290FE27B00F220CA /* Repo */,
+				7AD8AF04290FE27400F220CA /* ViewModels */,
+				7AD8AF03290FE26B00F220CA /* Views */,
+				7AD8AF02290FE26300F220CA /* Model */,
 			);
 			path = Episode;
+			sourceTree = "<group>";
+		};
+		7AD8AF02290FE26300F220CA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7AD8AF03290FE26B00F220CA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7AD8AEFC290FDDAC00F220CA /* EpisodeListViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7AD8AF04290FE27400F220CA /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7AD8AF05290FE27B00F220CA /* Repo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repo;
+			sourceTree = "<group>";
+		};
+		7AD8AF06290FE2A100F220CA /* Repo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repo;
+			sourceTree = "<group>";
+		};
+		7AD8AF07290FE2A600F220CA /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7AD8AF08290FE2AD00F220CA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7AD8AEFE290FDDC600F220CA /* LocationListViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7AD8AF09290FE2BA00F220CA /* Repo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repo;
+			sourceTree = "<group>";
+		};
+		7AD8AF0A290FE2C000F220CA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7AD8AF0E290FE3B800F220CA /* Character.swift */,
+				7AD8AF10290FE6EF00F220CA /* CharacterLocation.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7AD8AF0B290FE2C500F220CA /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7AD8AF0C290FE2D300F220CA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7AD8AF00290FDDDE00F220CA /* CharacterListViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7AD8AF0D290FE2DF00F220CA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,7 +385,9 @@
 			files = (
 				7AD8AEFD290FDDAC00F220CA /* EpisodeListViewController.swift in Sources */,
 				7AD8AF01290FDDDE00F220CA /* CharacterListViewController.swift in Sources */,
+				7AD8AF0F290FE3B800F220CA /* Character.swift in Sources */,
 				7AD8AEFF290FDDC600F220CA /* LocationListViewController.swift in Sources */,
+				7AD8AF11290FE6EF00F220CA /* CharacterLocation.swift in Sources */,
 				7AD8AECA290FBAAD00F220CA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

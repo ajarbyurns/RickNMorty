@@ -1,9 +1,6 @@
 //
 //  CharacterListViewController.swift
 //  RickNMorty
-//
-//  Created by bitocto_Barry on 31/10/22.
-//
 
 import UIKit
 
