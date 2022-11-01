@@ -8,6 +8,6 @@ import Foundation
 struct CharacterLocation : Decodable {
     
     let name : String
-    let url : URL
+    let url : String
     
 }

@@ -6,7 +6,10 @@ import UIKit
 
 class CharacterListViewController: UIViewController {
     
-    init(){
+    var viewModel : CharacterListViewModel
+    
+    init(_ viewModel: CharacterListViewModel){
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -17,7 +20,8 @@ class CharacterListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        viewModel.delegate = self
+        viewModel.getCharacters()
     }
     
     override func loadView() {
@@ -25,14 +29,23 @@ class CharacterListViewController: UIViewController {
         view.backgroundColor = .white
     }
 
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension CharacterListViewController : CharacterListViewModelDelegate {
+    
+    func setCharacters(_ characters: [Character]) {
+        print(characters.count)
+        print(characters[0].image)
     }
-    */
-
+    
+    func error(_ error: ApiError) {
+        switch error {
+        case .ConnectionError:
+            print("Connection Error")
+        case .JSONError:
+            print("JSON Error")
+        }
+    }
+    
+    
 }
