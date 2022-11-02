@@ -9,7 +9,8 @@ import Foundation
 
 struct CharactersResponse : Decodable {
     
-    let info: PageInfo
-    let results : [Character]
+    let error: String?
+    let info: PageInfo?
+    let results : [Character]?
     
 }

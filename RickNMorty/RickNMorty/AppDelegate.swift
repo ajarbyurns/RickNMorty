@@ -4,6 +4,9 @@
 
 import UIKit
 
+let lightBG = UIColor(red: 211/255, green: 211/255, blue: 211/255, alpha: 1.0)
+let darkBG = UIColor(red: 150/255, green: 150/255, blue: 150/255, alpha: 1.0)
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -18,7 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func configureNavigation(){
         
-        let characterListViewModel = CharacterListViewModel()
+        let characterListRepo = CharacterListRepo()
+        let characterListViewModel = CharacterListViewModel(characterListRepo)
         let character = CharacterListViewController(characterListViewModel)
         character.tabBarItem = UITabBarItem(title: "Character", image: UIImage(named: "CharacterD"), selectedImage: UIImage(named: "CharacterS"))
         
@@ -31,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [character, location, episode]
         
-        tabBarController.tabBar.backgroundColor = .lightGray
+        tabBarController.tabBar.backgroundColor = lightBG
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.link], for: .selected)
         UITabBarItem.appearance().titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -5)

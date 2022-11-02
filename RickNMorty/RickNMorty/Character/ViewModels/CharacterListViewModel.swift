@@ -7,13 +7,12 @@
 
 import Foundation
 
-enum ApiError {
-    case ConnectionError, JSONError
-}
+
 
 protocol CharacterListViewModelDelegate : AnyObject {
-    func setCharacters(_ characters : [Character])
-    func error(_ error: ApiError)
+    func charactersSet()
+    func noMorePages()
+    func foundError(_ error: ApiError)
 }
 
 class CharacterListViewModel : NSObject {
@@ -21,47 +20,80 @@ class CharacterListViewModel : NSObject {
     weak var delegate : CharacterListViewModelDelegate? = nil
     var characters : [Character] = []{
         didSet{
-            delegate?.setCharacters(characters)
+            delegate?.charactersSet()
         }
+    }
+    var nextPage : String? = nil
+    var repo : CharacterListRepo
+    
+    init(_ repo : CharacterListRepo){
+        self.repo = repo
     }
     
     func getCharacters(){
         
-        guard let url = URL(string: "https://rickandmortyapi.com/api/character") else {
-            print("URL is Wrong")
+        let url = "https://rickandmortyapi.com/api/character"
+        
+        repo.getData(url, { [weak self]
+            error in
+            self?.delegate?.foundError(error)
+        }, { [weak self]
+            (charResp : CharactersResponse) in
+            self?.nextPage = charResp.info?.next
+            self?.characters = charResp.results ?? []
+        })
+    }
+    
+    func getCharactersByFilter(_ name : String?, _ status : String? = nil, _ species : String? = nil, _ gender : String? = nil){
+        
+        var url = "https://rickandmortyapi.com/api/character/?"
+        
+        var queryList : [String] = []
+        if let name = name {
+            queryList.append("name=\(name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? name)")
+        }
+        if let status = status {
+            queryList.append("status=\(status.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? status)")
+        }
+        if let species = species {
+            queryList.append("species=\(species.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? species)")
+        }
+        if let gender = gender {
+            queryList.append("gender=\(gender.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? gender)")
+        }
+        
+        for i in queryList.indices {
+            url.append(queryList[i])
+            if(i < queryList.count - 1){
+                url.append("&")
+            }
+        }
+        
+        repo.getData(url, { [weak self]
+            error in
+            self?.delegate?.foundError(error)
+        }, { [weak self]
+            (charResp : CharactersResponse) in
+            self?.nextPage = charResp.info?.next
+            self?.characters = charResp.results ?? []
+        })
+    }
+    
+    func loadMoreCharacters(){
+        
+        guard let nextPage = self.nextPage else {
+            self.delegate?.noMorePages()
             return
         }
         
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.timeoutInterval = 10
-        
-        URLSession.shared.dataTask(with: request) {data, response, error in
-                        
-            guard error == nil, let data = data else {
-                print(error.debugDescription)
-                self.delegate?.error(.ConnectionError)
-                return
-            }
-            
-            do {
-                /*let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                print(json)*/
-                                
-                let decoder = JSONDecoder()
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-                dateFormatter.locale = Locale(identifier: "en_US")
-                dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-                decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                
-                let charResp : CharactersResponse = try decoder.decode(CharactersResponse.self, from: data)
-                self.characters = charResp.results
-            } catch let jsonError {
-                print(jsonError.localizedDescription)
-                self.delegate?.error(.JSONError)
-            }
-        }.resume()
+        repo.getData(nextPage, { [weak self]
+            error in
+            self?.delegate?.foundError(error)
+        }, { [weak self]
+            (charResp : CharactersResponse) in
+            self?.nextPage = charResp.info?.next
+            self?.characters.append(contentsOf: charResp.results ?? [])
+        })
     }
     
 }
