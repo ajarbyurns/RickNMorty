@@ -110,7 +110,11 @@ class CharacterListViewController: UIViewController {
     }
     
     @objc private func showFilters(){
-        
+        let filterViewModel = CharacterFilterViewModel()
+        let filterViewController = CharacterFilterViewController(filterViewModel)
+        filterViewController.modalPresentationStyle = .pageSheet
+        filterViewController.delegate = self
+        present(filterViewController, animated: true, completion: nil)
     }
 
 }
@@ -135,6 +139,24 @@ extension CharacterListViewController : CharacterListViewModelDelegate {
     func noMorePages() {
         print("All Pages Loaded")
     }
+    
+    func imageDataLoaded(_ atPosition: Int, _ data: Data) {
+        let indexPath = IndexPath(item: atPosition, section: 0)
+        if let cell = collectionView?.cellForItem(at: indexPath) as? CharacterListCell {
+            if(cell.character?.image == viewModel.characters[atPosition].image){
+                cell.imageView.image = UIImage(data: data)
+            }
+        }
+    }
+    
+}
+
+extension CharacterListViewController : CharacterFilterDelegate {
+    
+    func applyFilter(_ status: String?, _ species: String?, _ gender: String?) {
+        viewModel.getCharactersByFilter(nil, status, species, gender)
+    }
+    
     
 }
 
@@ -168,22 +190,11 @@ extension CharacterListViewController : UICollectionViewDelegate, UICollectionVi
     var inset: CGFloat {
         get { return 10 }
     }
-    var minimumInteritemSpacing: CGFloat {
-        get { return 20 }
-    }
     var cellsPerRow : Int {
         get { return 2 }
     }
     var cellId : String {
         get { return "ImageCell" }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return minimumInteritemSpacing
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingFor section: Int) -> CGFloat {
-        return minimumInteritemSpacing
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -198,14 +209,16 @@ extension CharacterListViewController : UICollectionViewDelegate, UICollectionVi
         
         let chara = viewModel.characters[indexPath.row]
         
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? CharacterListCell{
-            cell.setCharacter(chara: chara)
-            return cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? CharacterListCell ?? CharacterListCell(frame : CGRect())
+        cell.setCharacter(chara: chara)
+        if let data = viewModel.imageDataCache.object(forKey: chara.image as AnyObject) as? Data{
+            cell.imageView.image = UIImage(data: data)
         } else {
-            let cell = CharacterListCell(frame : CGRect())
-            cell.setCharacter(chara: chara)
-            return cell
+            cell.imageView.image = nil
+            viewModel.loadImage(indexPath.row)
         }
+        cell.layoutIfNeeded()
+        return cell
     }
     
 }

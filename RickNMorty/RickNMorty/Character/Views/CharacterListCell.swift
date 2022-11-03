@@ -4,14 +4,15 @@ import UIKit
 class CharacterListCell: UICollectionViewCell {
     
     var loading : UIActivityIndicatorView
-    var imageView: DownloadableImageView
+    var imageView: UIImageView
     var nameLabel : UILabel
     var speciesLabel : UILabel
     var content : UIView
+    var character : Character?
     
     override init(frame : CGRect){
         self.loading = UIActivityIndicatorView(style: .large)
-        self.imageView = DownloadableImageView()
+        self.imageView = UIImageView()
         self.nameLabel = UILabel()
         self.speciesLabel = UILabel()
         self.content = UIView()
@@ -73,10 +74,7 @@ class CharacterListCell: UICollectionViewCell {
         imageView.widthAnchor.constraint(equalTo: content.widthAnchor).isActive = true
         imageView.topAnchor.constraint(equalTo: content.topAnchor).isActive = true
         imageView.bottomAnchor.constraint(equalTo: labelView.topAnchor).isActive = true
-        imageView.delegate = self
-        
-        content.isHidden = true
-        
+                
     }
      
     required init?(coder: NSCoder) {
@@ -85,16 +83,12 @@ class CharacterListCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        imageView.cancelLoadingImage()
         loading.startAnimating()
     }
     
     func setCharacter(chara : Character){
         
-        if let img = chara.image {
-            imageView.downloadWithUrlSession(at: self, urlStr: img)
-        }
-        
+        character = chara
         nameLabel.text = chara.name
         speciesLabel.text = chara.species
         
@@ -107,19 +101,6 @@ class CharacterListCell: UICollectionViewCell {
             backgroundColor = .systemCyan
         default:
             backgroundColor = lightBG
-        }
-    }
-    
-}
-
-extension CharacterListCell : DownloadableImageViewDelegate {
-    
-    func loadingState(_ load: Bool) {
-        if(load){
-            loading.startAnimating()
-        } else {
-            content.isHidden = false
-            loading.stopAnimating()
         }
     }
     
