@@ -21,8 +21,8 @@ class FilterButtonCell: UICollectionViewCell {
                 nameLabel.textColor = .link
                 layer.borderColor = UIColor.link.cgColor
             case .normal:
-                nameLabel.textColor = lightBG
-                layer.borderColor = lightBG.cgColor
+                nameLabel.textColor = .darkGray
+                layer.borderColor = UIColor.darkGray.cgColor
             }
         }
     }
@@ -37,10 +37,10 @@ class FilterButtonCell: UICollectionViewCell {
         backgroundColor = .white
         layer.cornerRadius = 10
         layer.borderWidth = 1
-        layer.borderColor = lightBG.cgColor
+        layer.borderColor = UIColor.darkGray.cgColor
         
         nameLabel.font = UIFont.systemFont(ofSize: 14)
-        nameLabel.textColor = lightBG
+        nameLabel.textColor = .darkGray
         nameLabel.numberOfLines = 1
         nameLabel.textAlignment = .center
         addSubview(nameLabel)

@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let character = CharacterListViewController(characterListViewModel)
         character.tabBarItem = UITabBarItem(title: "Character", image: UIImage(named: "CharacterD"), selectedImage: UIImage(named: "CharacterS"))
         let charNav = UINavigationController(rootViewController: character)
+        charNav.navigationBar.backgroundColor = lightBG
         
         let location = LocationListViewController()
         location.tabBarItem = UITabBarItem(title: "Location", image: UIImage(named: "LocationD"), selectedImage: UIImage(named: "LocationS"))
