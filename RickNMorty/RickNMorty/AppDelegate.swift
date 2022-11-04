@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let characterListViewModel = CharacterListViewModel(characterListRepo)
         let character = CharacterListViewController(characterListViewModel)
         character.tabBarItem = UITabBarItem(title: "Character", image: UIImage(named: "CharacterD"), selectedImage: UIImage(named: "CharacterS"))
+        let charNav = UINavigationController(rootViewController: character)
         
         let location = LocationListViewController()
         location.tabBarItem = UITabBarItem(title: "Location", image: UIImage(named: "LocationD"), selectedImage: UIImage(named: "LocationS"))
@@ -33,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         episode.tabBarItem = UITabBarItem(title: "Episode", image: UIImage(named: "EpisodeD"), selectedImage: UIImage(named: "EpisodeS"))
         
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [character, location, episode]
+        tabBarController.viewControllers = [charNav, location, episode]
         
         tabBarController.tabBar.backgroundColor = lightBG
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray], for: .normal)

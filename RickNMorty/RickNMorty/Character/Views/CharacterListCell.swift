@@ -8,7 +8,6 @@ class CharacterListCell: UICollectionViewCell {
     var nameLabel : UILabel
     var speciesLabel : UILabel
     var content : UIView
-    var character : Character?
     
     override init(frame : CGRect){
         self.loading = UIActivityIndicatorView(style: .large)
@@ -88,7 +87,6 @@ class CharacterListCell: UICollectionViewCell {
     
     func setCharacter(chara : Character){
         
-        character = chara
         nameLabel.text = chara.name
         speciesLabel.text = chara.species
         

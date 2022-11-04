@@ -25,7 +25,7 @@ class CharacterListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                        
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
         layout.itemSize = CGSize(width: view.frame.width/CGFloat(cellsPerRow) - (2 * inset), height: view.frame.height/4)
@@ -51,16 +51,8 @@ class CharacterListViewController: UIViewController {
         super.loadView()
         view.backgroundColor = lightBG
         
-        let filter = UIImageView(image: UIImage(named: "Filter"))
-        view.addSubview(filter)
-        filter.translatesAutoresizingMaskIntoConstraints = false
-        filter.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        filter.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        filter.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-        filter.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
-        let filterTap = UITapGestureRecognizer(target: self, action: #selector(showFilters))
-        filter.addGestureRecognizer(filterTap)
-        filter.isUserInteractionEnabled = true
+        let filterItem = UIBarButtonItem(image: UIImage(named: "Filter"), style: .plain, target: self, action: #selector(showFilters))
+        self.navigationItem.rightBarButtonItem = filterItem
         
         let headerLabel = UILabel()
         headerLabel.text = "Character"
@@ -70,7 +62,7 @@ class CharacterListViewController: UIViewController {
         view.addSubview(headerLabel)
         headerLabel.translatesAutoresizingMaskIntoConstraints = false
         headerLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
-        headerLabel.topAnchor.constraint(equalTo: filter.bottomAnchor, constant: 20).isActive = true
+        headerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         
         let searchView = UIView()
         searchView.layer.cornerRadius = 10
@@ -143,9 +135,7 @@ extension CharacterListViewController : CharacterListViewModelDelegate {
     func imageDataLoaded(_ atPosition: Int, _ data: Data) {
         let indexPath = IndexPath(item: atPosition, section: 0)
         if let cell = collectionView?.cellForItem(at: indexPath) as? CharacterListCell {
-            if(cell.character?.image == viewModel.characters[atPosition].image){
-                cell.imageView.image = UIImage(data: data)
-            }
+            cell.imageView.image = UIImage(data: data)
         }
     }
     
@@ -156,8 +146,6 @@ extension CharacterListViewController : CharacterFilterDelegate {
     func applyFilter(_ status: String?, _ species: String?, _ gender: String?) {
         viewModel.getCharactersByFilter(nil, status, species, gender)
     }
-    
-    
 }
 
 extension CharacterListViewController : UITextFieldDelegate {
@@ -199,6 +187,15 @@ extension CharacterListViewController : UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.characters.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let char = viewModel.characters[indexPath.row]
+        let repo = CharacterDetailRepo()
+        let imgData = viewModel.imageDataCache.object(forKey: char.image as AnyObject) as? Data
+        let detailViewModel = CharacterDetailViewModel(char, imgData, repo)
+        let charDetailVC = CharacterDetailViewController(detailViewModel)
+        navigationController?.pushViewController(charDetailVC, animated: false)
     }
         
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
