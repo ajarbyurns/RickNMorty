@@ -22,6 +22,8 @@ class CharacterDetailViewController: UIViewController {
 
         viewModel.delegate = self
         viewModel.loadImage()
+        
+        tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -1,10 +1,3 @@
-//
-//  CharacterListViewModel.swift
-//  RickNMorty
-//
-//  Created by bitocto_Barry on 01/11/22.
-//
-
 import Foundation
 
 protocol CharacterListViewModelDelegate : AnyObject {

@@ -186,7 +186,6 @@ extension CharacterListViewController : UICollectionViewDelegate, UICollectionVi
         if let cell = collectionView.cellForItem(at: indexPath) as? CharacterListCell {
             if let detailViewModel = cell.viewModel {
                 let charDetailVC = CharacterDetailViewController(detailViewModel)
-                tabBarController?.tabBar.isHidden = true
                 navigationController?.pushViewController(charDetailVC, animated: false)
             }
         }

@@ -7,6 +7,10 @@ import UIKit
 let lightBG = UIColor(red: 211/255, green: 211/255, blue: 211/255, alpha: 1.0)
 let darkBG = UIColor(red: 150/255, green: 150/255, blue: 150/255, alpha: 1.0)
 
+enum ApiError {
+    case URL, Connection, Json
+}
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -28,14 +32,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let charNav = UINavigationController(rootViewController: character)
         charNav.navigationBar.backgroundColor = lightBG
         
-        let location = LocationListViewController()
+        let locationListRepo = LocationListRepo()
+        let locationListViewModel = LocationListViewModel(locationListRepo)
+        let location = LocationListViewController(locationListViewModel)
         location.tabBarItem = UITabBarItem(title: "Location", image: UIImage(named: "LocationD"), selectedImage: UIImage(named: "LocationS"))
+        let locationNav = UINavigationController(rootViewController: location)
+        locationNav.navigationBar.backgroundColor = lightBG
         
         let episode = EpisodeListViewController()
         episode.tabBarItem = UITabBarItem(title: "Episode", image: UIImage(named: "EpisodeD"), selectedImage: UIImage(named: "EpisodeS"))
         
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [charNav, location, episode]
+        tabBarController.viewControllers = [charNav, locationNav, episode]
         
         tabBarController.tabBar.backgroundColor = lightBG
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray], for: .normal)

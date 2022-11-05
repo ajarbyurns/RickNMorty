@@ -1,8 +1,8 @@
 import Foundation
 
-class CharacterListRepo {
+class LocationListRepo {
         
-    func getData(_ urlString : String, _ errorCompletion : ((ApiError)->())? = nil, _ completion : ((CharactersResponse)->())? = nil){
+    func getData(_ urlString : String, _ errorCompletion : ((ApiError)->())? = nil, _ completion : ((LocationResponse)->())? = nil){
         
         guard let url = URL(string: urlString) else {
             DispatchQueue.main.async {
@@ -35,7 +35,7 @@ class CharacterListRepo {
                 dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
                 decoder.dateDecodingStrategy = .formatted(dateFormatter)
                 
-                let res : CharactersResponse = try decoder.decode(CharactersResponse.self, from: data)
+                let res : LocationResponse = try decoder.decode(LocationResponse.self, from: data)
                 
                 DispatchQueue.main.async {
                     completion?(res)
@@ -49,3 +49,4 @@ class CharacterListRepo {
     }
     
 }
+
