@@ -5,6 +5,8 @@ protocol CharacterDetailDelegate : AnyObject {
     func foundError(_ error : ApiError)
 }
 
+var imageDataCache = NSCache<AnyObject, AnyObject>()
+
 class CharacterDetailViewModel : NSObject {
     
     weak var delegate : CharacterDetailDelegate?
@@ -24,9 +26,9 @@ class CharacterDetailViewModel : NSObject {
         }
     }
     
-    init(_ char : Character, _ imgData : Data?, _ repo : CharacterDetailRepo){
+    init(_ char : Character, _ repo : CharacterDetailRepo){
         self.character = char
-        self.characterImgData = imgData
+        self.characterImgData = imageDataCache.object(forKey: character.image as AnyObject) as? Data
         self.repo = repo
     }
     
@@ -42,7 +44,8 @@ class CharacterDetailViewModel : NSObject {
             self?.delegate?.foundError(error)
         }, { [weak self]
             data in
-            self?.delegate?.imageLoaded(data)
+            imageDataCache.setObject(data as AnyObject, forKey: self?.character.image as AnyObject)
+            self?.characterImgData = data
         })
     }
     

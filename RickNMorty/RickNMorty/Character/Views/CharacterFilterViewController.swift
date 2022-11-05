@@ -1,10 +1,3 @@
-//
-//  CharacterFilterViewController.swift
-//  RickNMorty
-//
-//  Created by bitocto_Barry on 01/11/22.
-//
-
 import UIKit
 
 protocol CharacterFilterDelegate : AnyObject {
@@ -68,7 +61,7 @@ class CharacterFilterViewController: UIViewController {
         container.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         container.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
-        headerLabel.text = "Filter"
+        headerLabel.text = viewModel.header
         headerLabel.font = UIFont.systemFont(ofSize: 25, weight: .heavy)
         headerLabel.textAlignment = .left
         headerLabel.textColor = .black
@@ -77,7 +70,7 @@ class CharacterFilterViewController: UIViewController {
         headerLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 10).isActive = true
         headerLabel.topAnchor.constraint(equalTo: container.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         
-        applyButton.setTitle("Apply", for: .normal)
+        applyButton.setTitle(viewModel.buttonText, for: .normal)
         applyButton.backgroundColor = .link
         applyButton.setTitleColor(.white, for: .normal)
         applyButton.layer.cornerRadius = 10
@@ -160,7 +153,7 @@ extension CharacterFilterViewController : UICollectionViewDelegate, UICollection
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? FilterButtonCell ?? FilterButtonCell(frame : CGRect())
         
-        cell.setName(name)
+        cell.nameLabel.text = name
         cell.layoutIfNeeded()
         return cell
     }

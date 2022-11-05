@@ -11,13 +11,11 @@ protocol CharacterListViewModelDelegate : AnyObject {
     func charactersSet()
     func noMorePages()
     func foundError(_ error: ApiError)
-    func imageDataLoaded(_ atPosition : Int, _ data: Data)
 }
 
 class CharacterListViewModel : NSObject {
     
     weak var delegate : CharacterListViewModelDelegate? = nil
-    var imageDataCache = NSCache<AnyObject, AnyObject>()
     var characters : [Character] = []{
         didSet{
             delegate?.charactersSet()
@@ -80,29 +78,6 @@ class CharacterListViewModel : NSObject {
             (charResp : CharactersResponse) in
             self?.nextPage = charResp.info?.next
             self?.characters = charResp.results ?? []
-        })
-    }
-    
-    func loadImage(_ atCharPosition : Int){
-        
-        guard atCharPosition > -1 && atCharPosition < characters.count else {
-            return
-        }
-        
-        let char = characters[atCharPosition]
-                
-        if let data = imageDataCache.object(forKey: char.image as AnyObject) as? Data{
-            delegate?.imageDataLoaded(atCharPosition, data)
-            return
-        }
-        
-        repo.getImageData(char.image, { [weak self]
-            error in
-            self?.delegate?.foundError(error)
-        }, { [weak self]
-            imageData in
-            self?.imageDataCache.setObject(imageData as AnyObject, forKey: char.image as AnyObject)
-            self?.delegate?.imageDataLoaded(atCharPosition, imageData)
         })
     }
     

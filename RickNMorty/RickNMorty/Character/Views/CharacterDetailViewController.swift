@@ -1,10 +1,3 @@
-//
-//  CharacterDetailViewController.swift
-//  RickNMorty
-//
-//  Created by bitocto_Barry on 01/11/22.
-//
-
 import UIKit
 
 class CharacterDetailViewController: UIViewController {
@@ -18,7 +11,6 @@ class CharacterDetailViewController: UIViewController {
         imageView = UIImageView()
         loading = UIActivityIndicatorView(style: .large)
         super.init(nibName: nil, bundle: nil)
-        hidesBottomBarWhenPushed = true
     }
     
     required init?(coder: NSCoder) {
@@ -29,13 +21,12 @@ class CharacterDetailViewController: UIViewController {
         super.viewDidLoad()
 
         viewModel.delegate = self
-        
-        if let data = viewModel.characterImgData {
-            imageView.image = UIImage(data: data)
-        } else {
-            viewModel.loadImage()
-        }
-         
+        viewModel.loadImage()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
+        super.viewWillDisappear(animated)
     }
     
     override func loadView() {
@@ -128,8 +119,6 @@ class CharacterDetailViewController: UIViewController {
         statusLabel.textAlignment = .left
         statusFrame.addArrangedSubview(statusLabel)
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
-        //statusLabel.topAnchor.constraint(equalTo: statusFrame.topAnchor).isActive = true
-        //statusLabel.bottomAnchor.constraint(equalTo: statusFrame.bottomAnchor).isActive = true
         
         let statusImage = UIImageView()
         switch viewModel.character.status {
@@ -164,8 +153,6 @@ class CharacterDetailViewController: UIViewController {
         genderLabel.textAlignment = .left
         genderFrame.addArrangedSubview(genderLabel)
         genderLabel.translatesAutoresizingMaskIntoConstraints = false
-        //genderLabel.topAnchor.constraint(equalTo: genderFrame.topAnchor).isActive = true
-        //genderLabel.bottomAnchor.constraint(equalTo: genderFrame.bottomAnchor).isActive = true
         
         let genderImage = UIImageView()
         switch viewModel.character.gender {

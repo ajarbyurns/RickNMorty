@@ -131,14 +131,7 @@ extension CharacterListViewController : CharacterListViewModelDelegate {
     func noMorePages() {
         print("All Pages Loaded")
     }
-    
-    func imageDataLoaded(_ atPosition: Int, _ data: Data) {
-        let indexPath = IndexPath(item: atPosition, section: 0)
-        if let cell = collectionView?.cellForItem(at: indexPath) as? CharacterListCell {
-            cell.imageView.image = UIImage(data: data)
-        }
-    }
-    
+
 }
 
 extension CharacterListViewController : CharacterFilterDelegate {
@@ -190,12 +183,13 @@ extension CharacterListViewController : UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let char = viewModel.characters[indexPath.row]
-        let repo = CharacterDetailRepo()
-        let imgData = viewModel.imageDataCache.object(forKey: char.image as AnyObject) as? Data
-        let detailViewModel = CharacterDetailViewModel(char, imgData, repo)
-        let charDetailVC = CharacterDetailViewController(detailViewModel)
-        navigationController?.pushViewController(charDetailVC, animated: false)
+        if let cell = collectionView.cellForItem(at: indexPath) as? CharacterListCell {
+            if let detailViewModel = cell.viewModel {
+                let charDetailVC = CharacterDetailViewController(detailViewModel)
+                tabBarController?.tabBar.isHidden = true
+                navigationController?.pushViewController(charDetailVC, animated: false)
+            }
+        }
     }
         
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -203,17 +197,9 @@ extension CharacterListViewController : UICollectionViewDelegate, UICollectionVi
         if (indexPath.row == viewModel.characters.count - 1 ) {
             viewModel.loadMoreCharacters()
         }
-        
-        let chara = viewModel.characters[indexPath.row]
-        
+                
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? CharacterListCell ?? CharacterListCell(frame : CGRect())
-        cell.setCharacter(chara: chara)
-        if let data = viewModel.imageDataCache.object(forKey: chara.image as AnyObject) as? Data{
-            cell.imageView.image = UIImage(data: data)
-        } else {
-            cell.imageView.image = nil
-            viewModel.loadImage(indexPath.row)
-        }
+        cell.viewModel = CharacterDetailViewModel(viewModel.characters[indexPath.row], CharacterDetailRepo())
         cell.layoutIfNeeded()
         return cell
     }

@@ -55,7 +55,4 @@ class FilterButtonCell: UICollectionViewCell {
         fatalError("Not In Storyboard")
     }
     
-    func setName(_ name : String){
-        nameLabel.text = name
-    }
 }

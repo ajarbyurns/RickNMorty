@@ -9,6 +9,30 @@ class CharacterListCell: UICollectionViewCell {
     var speciesLabel : UILabel
     var content : UIView
     
+    var viewModel : CharacterDetailViewModel?{
+        didSet{
+                        
+            nameLabel.text = viewModel?.character.name
+            speciesLabel.text = viewModel?.character.species
+            
+            switch viewModel?.character.species {
+            case "Alien":
+                backgroundColor = .systemGreen
+            case "Animal":
+                backgroundColor = .systemRed
+            case "Mythological Creature":
+                backgroundColor = .systemCyan
+            default:
+                backgroundColor = lightBG
+            }
+            
+            imageView.image = nil
+            
+            viewModel?.delegate = self
+            viewModel?.loadImage()
+        }
+    }
+    
     override init(frame : CGRect){
         self.loading = UIActivityIndicatorView(style: .large)
         self.imageView = UIImageView()
@@ -85,21 +109,24 @@ class CharacterListCell: UICollectionViewCell {
         loading.startAnimating()
     }
     
-    func setCharacter(chara : Character){
-        
-        nameLabel.text = chara.name
-        speciesLabel.text = chara.species
-        
-        switch chara.species {
-        case "Alien":
-            backgroundColor = .systemGreen
-        case "Animal":
-            backgroundColor = .systemRed
-        case "Mythological Creature":
-            backgroundColor = .systemCyan
-        default:
-            backgroundColor = lightBG
+}
+
+extension CharacterListCell : CharacterDetailDelegate {
+    
+    func imageLoaded(_ imageData: Data) {
+        imageView.image = UIImage(data: imageData)
+    }
+    
+    func foundError(_ error: ApiError) {
+        switch error {
+        case .URL:
+            print("URL Error")
+        case .Connection:
+            print("Connection Error")
+        case .Json:
+            print("JSON Error")
         }
     }
+    
     
 }
