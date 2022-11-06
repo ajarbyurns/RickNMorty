@@ -104,7 +104,7 @@ class CharacterListViewController: UIViewController {
     @objc private func showFilters(){
         let filterViewModel = CharacterFilterViewModel()
         let filterViewController = CharacterFilterViewController(filterViewModel)
-        filterViewController.modalPresentationStyle = .pageSheet
+        filterViewController.modalPresentationStyle = .formSheet
         filterViewController.delegate = self
         present(filterViewController, animated: true, completion: nil)
     }

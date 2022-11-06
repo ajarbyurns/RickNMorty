@@ -22,7 +22,7 @@ class LocationDetailViewModel : NSObject {
 
         if let dt = dateFormatter.date(from: date) {
             dateFormatter.timeZone = TimeZone.current
-            dateFormatter.dateFormat = "HH:mm, MMM yyyy"
+            dateFormatter.dateFormat = "HH:mm, MMMM yyyy"
 
             return dateFormatter.string(from: dt)
         } else {

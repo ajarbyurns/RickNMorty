@@ -1,10 +1,3 @@
-//
-//  LocationListViewController.swift
-//  RickNMorty
-//
-//  Created by bitocto_Barry on 31/10/22.
-//
-
 import UIKit
 
 class LocationListViewController: UIViewController {
@@ -144,10 +137,6 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
         get { return "LocationCell" }
     }
     
-    var spacing : CGFloat {
-        get { return 5 }
-    }
-    
     var rowHeight : CGFloat {
         get { return 80 }
     }
@@ -165,8 +154,21 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
         
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if let cell = tableView.cellForRow(at: indexPath) as? LocationListCell {
+            if let locationDetailViewModel = cell.viewModel {
+                let locationDetailVC = LocationDetailViewController(locationDetailViewModel)
+                let navVC = UINavigationController(rootViewController: locationDetailVC)
+                navVC.navigationBar.backgroundColor = lightBG
+                self.present(navVC, animated: true, completion: nil)
+            }
+        }
+        
+    }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return spacing
+        return 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
