@@ -39,11 +39,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let locationNav = UINavigationController(rootViewController: location)
         locationNav.navigationBar.backgroundColor = lightBG
         
-        let episode = EpisodeListViewController()
+        let episodeListRepo = EpisodeListRepo()
+        let episodeListViewModel = EpisodeListViewModel(episodeListRepo)
+        let episode = EpisodeListViewController(episodeListViewModel)
         episode.tabBarItem = UITabBarItem(title: "Episode", image: UIImage(named: "EpisodeD"), selectedImage: UIImage(named: "EpisodeS"))
+        let episodeNav = UINavigationController(rootViewController: episode)
+        episodeNav.navigationBar.backgroundColor = lightBG
         
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [charNav, locationNav, episode]
+        tabBarController.viewControllers = [charNav, locationNav, episodeNav]
         
         tabBarController.tabBar.backgroundColor = lightBG
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray], for: .normal)

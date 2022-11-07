@@ -122,13 +122,6 @@ extension LocationListViewController : UITextFieldDelegate {
         tableView.setContentOffset(CGPoint(x:0,y:0), animated: false)
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let allowedCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-        let allowedCharacterSet = CharacterSet(charactersIn: allowedCharacters)
-        let typedCharacterSet = CharacterSet(charactersIn: string)
-        let alphabet = allowedCharacterSet.isSuperset(of: typedCharacterSet)
-        return alphabet
-    }
 }
 
 extension LocationListViewController : UITableViewDelegate, UITableViewDataSource {
@@ -143,7 +136,7 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if (indexPath.row == viewModel.locations.count - 1 ) {
+        if (indexPath.section == viewModel.locations.count - 1 ) {
             viewModel.loadMore()
         }
         

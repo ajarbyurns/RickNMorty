@@ -157,13 +157,6 @@ extension CharacterListViewController : UITextFieldDelegate {
         collectionView?.setContentOffset(CGPoint(x:0,y:0), animated: false)
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let allowedCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-        let allowedCharacterSet = CharacterSet(charactersIn: allowedCharacters)
-        let typedCharacterSet = CharacterSet(charactersIn: string)
-        let alphabet = allowedCharacterSet.isSuperset(of: typedCharacterSet)
-        return alphabet
-    }
 }
 
 extension CharacterListViewController : UICollectionViewDelegate, UICollectionViewDataSource {

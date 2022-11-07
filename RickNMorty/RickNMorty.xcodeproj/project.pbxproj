@@ -16,6 +16,14 @@
 		7A1EA3292916C9D000730A61 /* LocationDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1EA3282916C9D000730A61 /* LocationDetailViewModel.swift */; };
 		7A21578F29121309001EBF78 /* CharacterListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A21578E29121309001EBF78 /* CharacterListCell.swift */; };
 		7A215791291216EF001EBF78 /* CharacterListRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A215790291216EF001EBF78 /* CharacterListRepo.swift */; };
+		7A2C13A22918F99400D0DD6B /* EpisodeListRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2C13A12918F99400D0DD6B /* EpisodeListRepo.swift */; };
+		7A2C13A42918F9B700D0DD6B /* EpisodePageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2C13A32918F9B700D0DD6B /* EpisodePageInfo.swift */; };
+		7A2C13A62918F9CC00D0DD6B /* EpisodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2C13A52918F9CC00D0DD6B /* EpisodeResponse.swift */; };
+		7A2C13A82918F9DD00D0DD6B /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2C13A72918F9DD00D0DD6B /* Episode.swift */; };
+		7A2C13AA2918FEA500D0DD6B /* EpisodeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2C13A92918FEA500D0DD6B /* EpisodeListViewModel.swift */; };
+		7A2C13AC2918FEBC00D0DD6B /* EpisodeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2C13AB2918FEBC00D0DD6B /* EpisodeDetailViewModel.swift */; };
+		7A2C13AE2919026100D0DD6B /* EpisodeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2C13AD2919026100D0DD6B /* EpisodeDetailViewController.swift */; };
+		7A2C13B02919027600D0DD6B /* EpisodeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2C13AF2919027600D0DD6B /* EpisodeListCell.swift */; };
 		7A369857291108BB00D024B2 /* CharacterFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A369856291108BB00D024B2 /* CharacterFilterViewController.swift */; };
 		7A369859291108ED00D024B2 /* CharacterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A369858291108ED00D024B2 /* CharacterDetailViewController.swift */; };
 		7A36985B29110A5700D024B2 /* CharacterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A36985A29110A5700D024B2 /* CharacterListViewModel.swift */; };
@@ -67,6 +75,14 @@
 		7A1EA3282916C9D000730A61 /* LocationDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailViewModel.swift; sourceTree = "<group>"; };
 		7A21578E29121309001EBF78 /* CharacterListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListCell.swift; sourceTree = "<group>"; };
 		7A215790291216EF001EBF78 /* CharacterListRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListRepo.swift; sourceTree = "<group>"; };
+		7A2C13A12918F99400D0DD6B /* EpisodeListRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeListRepo.swift; sourceTree = "<group>"; };
+		7A2C13A32918F9B700D0DD6B /* EpisodePageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodePageInfo.swift; sourceTree = "<group>"; };
+		7A2C13A52918F9CC00D0DD6B /* EpisodeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeResponse.swift; sourceTree = "<group>"; };
+		7A2C13A72918F9DD00D0DD6B /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
+		7A2C13A92918FEA500D0DD6B /* EpisodeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeListViewModel.swift; sourceTree = "<group>"; };
+		7A2C13AB2918FEBC00D0DD6B /* EpisodeDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailViewModel.swift; sourceTree = "<group>"; };
+		7A2C13AD2919026100D0DD6B /* EpisodeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailViewController.swift; sourceTree = "<group>"; };
+		7A2C13AF2919027600D0DD6B /* EpisodeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeListCell.swift; sourceTree = "<group>"; };
 		7A369856291108BB00D024B2 /* CharacterFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterFilterViewController.swift; sourceTree = "<group>"; };
 		7A369858291108ED00D024B2 /* CharacterDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewController.swift; sourceTree = "<group>"; };
 		7A36985A29110A5700D024B2 /* CharacterListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListViewModel.swift; sourceTree = "<group>"; };
@@ -207,6 +223,9 @@
 		7AD8AF02290FE26300F220CA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7A2C13A32918F9B700D0DD6B /* EpisodePageInfo.swift */,
+				7A2C13A52918F9CC00D0DD6B /* EpisodeResponse.swift */,
+				7A2C13A72918F9DD00D0DD6B /* Episode.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -215,6 +234,8 @@
 			isa = PBXGroup;
 			children = (
 				7AD8AEFC290FDDAC00F220CA /* EpisodeListViewController.swift */,
+				7A2C13AD2919026100D0DD6B /* EpisodeDetailViewController.swift */,
+				7A2C13AF2919027600D0DD6B /* EpisodeListCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -222,6 +243,8 @@
 		7AD8AF04290FE27400F220CA /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				7A2C13A92918FEA500D0DD6B /* EpisodeListViewModel.swift */,
+				7A2C13AB2918FEBC00D0DD6B /* EpisodeDetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -229,6 +252,7 @@
 		7AD8AF05290FE27B00F220CA /* Repo */ = {
 			isa = PBXGroup;
 			children = (
+				7A2C13A12918F99400D0DD6B /* EpisodeListRepo.swift */,
 			);
 			path = Repo;
 			sourceTree = "<group>";
@@ -447,15 +471,19 @@
 				7A1EA31D2916B56A00730A61 /* LocationResponse.swift in Sources */,
 				7AD8AEFD290FDDAC00F220CA /* EpisodeListViewController.swift in Sources */,
 				7AD8AF01290FDDDE00F220CA /* CharacterListViewController.swift in Sources */,
+				7A2C13AE2919026100D0DD6B /* EpisodeDetailViewController.swift in Sources */,
 				7AD8AF0F290FE3B800F220CA /* Character.swift in Sources */,
 				7A1EA31B2916B52A00730A61 /* LocationPageInfo.swift in Sources */,
+				7A2C13B02919027600D0DD6B /* EpisodeListCell.swift in Sources */,
 				7A3FE6E02917B7EA0049980B /* LocationDetailViewController.swift in Sources */,
 				7A1EA3272916C83C00730A61 /* LocationListCell.swift in Sources */,
+				7A2C13AA2918FEA500D0DD6B /* EpisodeListViewModel.swift in Sources */,
 				7AD8AEFF290FDDC600F220CA /* LocationListViewController.swift in Sources */,
 				7A36985D2911184A00D024B2 /* CharactersResponse.swift in Sources */,
 				7A41329929139D190040C64B /* FilterButtonCell.swift in Sources */,
 				7A1EA3252916B8CA00730A61 /* LocationListViewModel.swift in Sources */,
 				7A36985B29110A5700D024B2 /* CharacterListViewModel.swift in Sources */,
+				7A2C13A82918F9DD00D0DD6B /* Episode.swift in Sources */,
 				7A41329B2913A4910040C64B /* FilterSectionHeader.swift in Sources */,
 				7A41329D2913ACAA0040C64B /* CharacterFilterViewModel.swift in Sources */,
 				7A1EA3232916B6CC00730A61 /* LocationListRepo.swift in Sources */,
@@ -463,12 +491,16 @@
 				7A1EA31F2916B59800730A61 /* Location.swift in Sources */,
 				7A369859291108ED00D024B2 /* CharacterDetailViewController.swift in Sources */,
 				7AD8AF11290FE6EF00F220CA /* CharacterLocation.swift in Sources */,
+				7A2C13A62918F9CC00D0DD6B /* EpisodeResponse.swift in Sources */,
 				7A5669DB2914C0EE00618017 /* CharacterDetailViewModel.swift in Sources */,
 				7AD8AECA290FBAAD00F220CA /* AppDelegate.swift in Sources */,
+				7A2C13A42918F9B700D0DD6B /* EpisodePageInfo.swift in Sources */,
+				7A2C13A22918F99400D0DD6B /* EpisodeListRepo.swift in Sources */,
 				7A21578F29121309001EBF78 /* CharacterListCell.swift in Sources */,
 				7A5669DD2914C17900618017 /* CharacterDetailRepo.swift in Sources */,
 				7A215791291216EF001EBF78 /* CharacterListRepo.swift in Sources */,
 				7A1EA3292916C9D000730A61 /* LocationDetailViewModel.swift in Sources */,
+				7A2C13AC2918FEBC00D0DD6B /* EpisodeDetailViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
