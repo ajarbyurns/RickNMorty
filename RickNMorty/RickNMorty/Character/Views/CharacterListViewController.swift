@@ -178,7 +178,8 @@ extension CharacterListViewController : UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? CharacterListCell {
             if let detailViewModel = cell.viewModel {
-                let charDetailVC = CharacterDetailViewController(detailViewModel)
+                let charDetailVM = CharacterDetailViewModel(detailViewModel.character, detailViewModel.repo)
+                let charDetailVC = CharacterDetailViewController(charDetailVM)
                 navigationController?.pushViewController(charDetailVC, animated: false)
             }
         }
