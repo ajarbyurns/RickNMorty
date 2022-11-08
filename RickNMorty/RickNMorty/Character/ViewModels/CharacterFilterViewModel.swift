@@ -1,10 +1,3 @@
-//
-//  CharacterFilterViewModel.swift
-//  RickNMorty
-//
-//  Created by bitocto_Barry on 03/11/22.
-//
-
 import Foundation
 
 class CharacterFilterViewModel : NSObject {
