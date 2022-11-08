@@ -31,7 +31,7 @@ class EpisodeListViewController: UIViewController {
         super.loadView()
         view.backgroundColor = lightBG
         
-        self.navigationController?.navigationBar.topItem?.title = "Location"
+        self.navigationController?.navigationBar.topItem?.title = "Episode"
         
         let searchView = UIView()
         searchView.layer.cornerRadius = 10
@@ -134,6 +134,10 @@ extension EpisodeListViewController : UITableViewDelegate, UITableViewDataSource
         get { return 100 }
     }
     
+    var spacing : CGFloat {
+        get { return 20 }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if (indexPath.section == viewModel.episodes.count - 1 ) {
@@ -161,7 +165,7 @@ extension EpisodeListViewController : UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0
+        return spacing
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

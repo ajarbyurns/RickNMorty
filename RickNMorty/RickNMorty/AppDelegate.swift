@@ -30,29 +30,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let character = CharacterListViewController(characterListViewModel)
         character.tabBarItem = UITabBarItem(title: "Character", image: UIImage(named: "CharacterD"), selectedImage: UIImage(named: "CharacterS"))
         let charNav = UINavigationController(rootViewController: character)
-        charNav.navigationBar.backgroundColor = lightBG
         
         let locationListRepo = LocationListRepo()
         let locationListViewModel = LocationListViewModel(locationListRepo)
         let location = LocationListViewController(locationListViewModel)
         location.tabBarItem = UITabBarItem(title: "Location", image: UIImage(named: "LocationD"), selectedImage: UIImage(named: "LocationS"))
         let locationNav = UINavigationController(rootViewController: location)
-        locationNav.navigationBar.backgroundColor = lightBG
         
         let episodeListRepo = EpisodeListRepo()
         let episodeListViewModel = EpisodeListViewModel(episodeListRepo)
         let episode = EpisodeListViewController(episodeListViewModel)
         episode.tabBarItem = UITabBarItem(title: "Episode", image: UIImage(named: "EpisodeD"), selectedImage: UIImage(named: "EpisodeS"))
         let episodeNav = UINavigationController(rootViewController: episode)
-        episodeNav.navigationBar.backgroundColor = lightBG
         
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [charNav, locationNav, episodeNav]
         
-        tabBarController.tabBar.backgroundColor = lightBG
+        UITabBar.appearance().barTintColor = lightBG
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.link], for: .selected)
         UITabBarItem.appearance().titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -5)
+        
+        UINavigationBar.appearance().barTintColor = lightBG
+        UINavigationBar.appearance().shadowImage = UIImage()
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = tabBarController

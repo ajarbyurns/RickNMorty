@@ -117,7 +117,8 @@ class CharacterDetailViewController: UIViewController {
         statusLabel.text = "Status: \(viewModel.character.status.rawValue.capitalized)"
         statusLabel.font = UIFont.systemFont(ofSize: 18)
         statusLabel.textColor = .black
-        statusLabel.numberOfLines = 0
+        statusLabel.numberOfLines = 1
+        statusLabel.adjustsFontSizeToFitWidth = true
         statusLabel.textAlignment = .left
         statusFrame.addArrangedSubview(statusLabel)
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -151,7 +152,8 @@ class CharacterDetailViewController: UIViewController {
         genderLabel.text = "Gender: \(viewModel.character.gender.rawValue.capitalized)"
         genderLabel.font = UIFont.systemFont(ofSize: 18)
         genderLabel.textColor = .black
-        genderLabel.numberOfLines = 0
+        genderLabel.numberOfLines = 1
+        genderLabel.adjustsFontSizeToFitWidth = true
         genderLabel.textAlignment = .left
         genderFrame.addArrangedSubview(genderLabel)
         genderLabel.translatesAutoresizingMaskIntoConstraints = false

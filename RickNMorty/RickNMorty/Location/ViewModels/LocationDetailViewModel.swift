@@ -14,10 +14,10 @@ class LocationDetailViewModel : NSObject {
     }
     
     private func UTCToLocal() -> String {
-        let date = location.created.ISO8601Format()
+        let date = location.created.description
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
 
         if let dt = dateFormatter.date(from: date) {

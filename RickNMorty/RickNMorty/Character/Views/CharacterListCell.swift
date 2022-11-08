@@ -21,7 +21,7 @@ class CharacterListCell: UICollectionViewCell {
             case "Animal":
                 backgroundColor = .systemRed
             case "Mythological Creature":
-                backgroundColor = .systemCyan
+                backgroundColor = .systemBlue
             default:
                 backgroundColor = lightBG
             }
@@ -106,6 +106,7 @@ class CharacterListCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        loading.isHidden = false
         loading.startAnimating()
     }
     
@@ -115,6 +116,7 @@ extension CharacterListCell : CharacterDetailDelegate {
     
     func imageLoaded(_ imageData: Data) {
         imageView.image = UIImage(data: imageData)
+        loading.isHidden = true
     }
     
     func foundError(_ error: ApiError) {

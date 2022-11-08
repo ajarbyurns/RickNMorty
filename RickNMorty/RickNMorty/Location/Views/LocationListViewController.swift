@@ -134,6 +134,10 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
         get { return 80 }
     }
     
+    var spacing : CGFloat {
+        get { return 20 }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if (indexPath.section == viewModel.locations.count - 1 ) {
@@ -161,13 +165,13 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0
+        return spacing
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return rowHeight
     }
-    
+        
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         headerView.backgroundColor = UIColor.clear
