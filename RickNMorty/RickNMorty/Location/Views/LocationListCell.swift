@@ -33,7 +33,7 @@ class LocationListCell: UITableViewCell {
     private func setupViews(){
         backgroundColor = .white
         //frame = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: 90)
-        
+                
         let container = UIView()
         container.backgroundColor = .white
         container.layer.cornerRadius = 10

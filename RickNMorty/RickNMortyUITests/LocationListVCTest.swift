@@ -16,7 +16,7 @@ class LocationListVCTest: XCTestCase {
     }
 
     func testClickLocation() throws {
-        let firstElement = app.tables.element(boundBy: 0).cells.element(boundBy: 0)
+        let firstElement = app.tables.element(boundBy: 0)
         if firstElement.waitForExistence(timeout: 5) {
             firstElement.tap()
         }
