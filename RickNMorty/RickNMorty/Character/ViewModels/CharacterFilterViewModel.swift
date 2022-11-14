@@ -14,7 +14,7 @@ class CharacterFilterViewModel : NSObject {
     
     let headerId = "FilterSectionHeader"
     
-    var selected : [String?] = []
+    var selected : [String : String] = [:]
     var states : [[Bool]] = []
     
     weak var delegate : CharacterFilterViewModelDelegate? = nil
@@ -22,7 +22,6 @@ class CharacterFilterViewModel : NSObject {
     override init(){
         super.init()
         for i in sections.indices {
-            selected.append(nil)
             states.append([])
             for _ in rows[i].indices {
                 states[i].append(false)
@@ -31,16 +30,16 @@ class CharacterFilterViewModel : NSObject {
     }
     
     func selectAt(_ section : Int, _ row : Int){
-        selected[section] = rows[section][row]
+        selected[sections[section]] = rows[section][row]
         for i in states[section].indices {
             states[section][i] = false
-            states[section][row] = true
-            delegate?.filtersUpdated()
         }
+        states[section][row] = true
+        delegate?.filtersUpdated()
     }
     
     func deSelectAt(_ section : Int, _ row : Int){
-        selected[section] = nil
+        selected.removeValue(forKey: sections[section])
         states[section][row] = false
         delegate?.filtersUpdated()
     }

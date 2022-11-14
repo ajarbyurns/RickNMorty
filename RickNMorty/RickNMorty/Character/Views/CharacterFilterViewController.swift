@@ -90,7 +90,7 @@ class CharacterFilterViewController: UIViewController {
     
     private func applyFilter(){
         dismiss(animated: true, completion: {
-            self.delegate?.applyFilter(self.viewModel.selected[0], self.viewModel.selected[1], self.viewModel.selected[2])
+            self.delegate?.applyFilter(self.viewModel.selected["Status"], self.viewModel.selected["Species"], self.viewModel.selected["Gender"])
         })
     }
 
