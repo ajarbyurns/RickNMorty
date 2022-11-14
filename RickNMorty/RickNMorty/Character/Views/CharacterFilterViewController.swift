@@ -46,6 +46,9 @@ class CharacterFilterViewController: UIViewController {
             collectionView.dataSource = self
             collectionView.reloadData()
         }
+        
+        self.viewModel.delegate = self
+
     }
         
     override func loadView() {
@@ -122,21 +125,8 @@ extension CharacterFilterViewController : UICollectionViewDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if let cell = collectionView.cellForItem(at: indexPath) as? FilterButtonCell {
-            if(cell.state == .normal){
-                for i in 0..<collectionView.numberOfItems(inSection: indexPath.section){
-                    let iPath = IndexPath(row: i, section: indexPath.section)
-                    if let otherCell = collectionView.cellForItem(at: iPath) as? FilterButtonCell {
-                        otherCell.state = .normal
-                    }
-                }
-                cell.state = .selected
-                viewModel.selectAt(indexPath.section, indexPath.row)
-            } else {
-                cell.state = .normal
-                viewModel.deSelectAt(indexPath.section, indexPath.row)
-            }
-        }
+        viewModel.selectAt(indexPath.section, indexPath.row)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -150,10 +140,12 @@ extension CharacterFilterViewController : UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let name = viewModel.rows[indexPath.section][indexPath.row]
+        let state : Bool = viewModel.states[indexPath.section][indexPath.row]
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? FilterButtonCell ?? FilterButtonCell(frame : CGRect())
         
         cell.nameLabel.text = name
+        cell.state = state ? .selected : .normal
         cell.layoutIfNeeded()
         return cell
     }
@@ -168,4 +160,13 @@ extension CharacterFilterViewController : UICollectionViewDelegate, UICollection
         }
     }
         
+}
+
+extension CharacterFilterViewController : CharacterFilterViewModelDelegate {
+    
+    func filtersUpdated() {
+        collectionView?.reloadData()
+    }
+    
+    
 }
